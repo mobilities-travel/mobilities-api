@@ -1,0 +1,64 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Message {
+  body: String!
+  sent: String!
+}
+
+type User {
+  _id: ID!
+  email: String
+  name: String!
+  permalink: String!
+  active: Boolean!
+  githubId: String!
+  redditId: String!
+  avatar: String
+  bio: String
+  role: Roles!
+}
+
+enum Roles {
+  USER
+  ADMIN
+}
+
+type Query {
+  gitHubAuth(input: SocialAuthInput!): User!
+  redditAuth(input: SocialAuthInput!): User!
+  googleAuth(input: SocialAuthInput!): User!
+  getGoogleAuthURL: String!
+  users: [User!]!
+  me: User
+  user(input: GetUserInput!): User
+}
+
+input SocialAuthInput {
+  code: String
+}
+
+input GetUserInput {
+  userPermalink: String!
+}
+
+type Mutation {
+  sendMessage(input: SendMessageInput!): Message!
+  logout: User
+  updateUser(input: UpdateUserInput!): User!
+}
+
+input SendMessageInput {
+  body: String!
+}
+
+input UpdateUserInput {
+  email: String
+  name: String
+  bio: String
+}
+
+type Subscription {
+  newMessage: Message!
+}
